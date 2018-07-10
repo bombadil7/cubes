@@ -15,7 +15,11 @@ import sys
 class Cube:
 
     def __init__(self, message):
-        self.corners = ['a1', 'a2', 'a3', 'a4', 'b1', 'b2', 'b3', 'b4']
+        self.corners    = ['a1', 'a2', 'a3', 'a4', 'b1', 'b2', 'b3', 'b4']
+        self.down       = ['b1', 'a1', 'a4', 'b4', 'b2', 'a2', 'a3', 'b3']
+        self.up         = ['a2', 'b2', 'b3', 'a3', 'a1', 'b1', 'b4', 'a4']
+        self.right      = ['a4', 'a3', 'b3', 'b4', 'a1', 'a2', 'b2', 'b1']
+        self.left       = ['b1', 'b2', 'a2', 'a1', 'b4', 'b3', 'a3', 'a4']
 
 # Create an empty dictionary.  This way the cube has all the corners.
         self.ver = {}
@@ -28,17 +32,33 @@ class Cube:
             self.ver[self.corners[i]] = c
 
     def print_message(self):
-        message = ''.join(self.ver[c] for c in self.ver)
+        message = ''.join(self.ver[key] for key in self.corners)
         return message
 
-#    def rotate_up(self):
-#        self.ver[
+    def rotate_up(self):
+        temp = {}
+        for i, key in enumerate(self.corners):
+            temp[self.up[i]] = self.ver[key]
+        self.ver = temp
 
-#    def rotate_down(self):
+    def rotate_down(self):
+        temp = {}
+        for i, key in enumerate(self.corners):
+            temp[self.down[i]] = self.ver[key]
+        self.ver = temp
 
-#    def rotate_left(self):
+    def rotate_left(self):
+        temp = {}
+        for i, key in enumerate(self.corners):
+            temp[self.left[i]] = self.ver[key]
+        self.ver = temp
 
-#    def rotate_right(self):
+    def rotate_right(self):
+        temp = {}
+        for i, key in enumerate(self.corners):
+            temp[self.right[i]] = self.ver[key]
+        self.ver = temp
+
         
 
 #class Encoder():
@@ -88,3 +108,9 @@ if __name__=='__main__':
 
     cube = Cube(phrase)
     print(cube.print_message())
+    cube.rotate_up()
+    cube.rotate_down()
+    cube.rotate_left()
+    cube.rotate_right()
+    print(cube.print_message())
+
