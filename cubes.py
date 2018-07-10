@@ -1,14 +1,44 @@
 import math
 import sys
 
+"""
+         b2_____b3
+        /|      /|
+       / |     / |
+      a2______a3 |
+      |  b1___|_b4
+      | /     | /
+      |/      |/
+      a1_____a4
+"""
+
 class Cube:
 
     def __init__(self, message):
-        self.vert = [c for c in message if len(message) > 0 and len(message) < 9]
+        self.corners = ['a1', 'a2', 'a3', 'a4', 'b1', 'b2', 'b3', 'b4']
+
+# Create an empty dictionary.  This way the cube has all the corners.
+        self.ver = {}
+        for k in self.corners:
+            self.ver[k] = ''
+
+# Fill in the corners with available letters
+        mes = [message[i] for i in range(len(message))]
+        for i, c in enumerate(mes):
+            self.ver[self.corners[i]] = c
 
     def print_message(self):
-        for c in self.vert:
-            print(c)
+        message = ''.join(self.ver[c] for c in self.ver)
+        return message
+
+#    def rotate_up(self):
+#        self.ver[
+
+#    def rotate_down(self):
+
+#    def rotate_left(self):
+
+#    def rotate_right(self):
         
 
 #class Encoder():
@@ -57,4 +87,4 @@ if __name__=='__main__':
         phrase = 'Secure'
 
     cube = Cube(phrase)
-    cube.print_message()
+    print(cube.print_message())
