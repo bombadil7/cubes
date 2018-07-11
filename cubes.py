@@ -114,10 +114,9 @@ class Encoder():
                 key += ':' + dirs[random.randint(0, len(dirs) - 1)]
         return key
 
-if __name__=='__main__':
+def main():
     if  len(sys.argv) > 1:
         phrase = sys.argv[1]
-        
     else:
         phrase = 'Security is the key to prosperity'
 
@@ -133,3 +132,8 @@ if __name__=='__main__':
     print(phrase + ' is ' + str(len(phrase)) + " characters long")
     print(encoder.keyGenerator(phrase))
 #    print(keyGenerator(phrase))
+
+
+if __name__=='__main__':
+    main()
+
