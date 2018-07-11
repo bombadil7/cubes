@@ -85,17 +85,9 @@ class Encoder():
             ops_list.append(list(ops[1:]))
 
         # Create a list of sub-strings from the message which will fit into a cube
-        phrase_list = []
-        phr = ''
-        for i, c in enumerate(phrase):
-            phr += c
-            if i > 0 and (i+1) % 8 == 0 or i == (len(phrase) - 1):
-                phrase_list.append(phr)
-                phr = ''
-
+        phrase_list = [phrase[start:start+8] for start in range(0, len(phrase), 8)]
         if DEBUG:
             print(phrase_list)
-        
 
         # Now we encode the message according to these instructions
         encoded_phrase = ''
