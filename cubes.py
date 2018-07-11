@@ -2,6 +2,8 @@ import math
 import sys
 import random
 
+DEBUG = 1
+
 """
          b2_____b3
         /|      /|
@@ -25,14 +27,14 @@ class Cube:
 # Create an empty dictionary.  This way the cube has all the corners.
         self.ver = {}
         for k in self.corners:
-            self.ver[k] = '?'
+            self.ver[k] = ''
 
 # Fill in the corners with available letters
         mes = [message[i] for i in range(len(message))]
         for i, c in enumerate(mes):
             self.ver[self.corners[i]] = c
 
-    def print_message(self):
+    def get_message(self):
         message = ''.join(self.ver[key] for key in self.corners)
         return message
 
@@ -82,10 +84,38 @@ class Encoder():
             ops = cube.split(':')
             ops_list.append(list(ops[1:]))
 
-        print(ops_list)
+        # Create a list of sub-strings from the message which will fit into a cube
+        phrase_list = []
+        phr = ''
+        for i, c in enumerate(phrase):
+            phr += c
+            if i > 0 and (i+1) % 8 == 0 or i == (len(phrase) - 1):
+                phrase_list.append(phr)
+                phr = ''
+
+        if DEBUG:
+            print(phrase_list)
         
 
-#        return encoded_phrase 
+        # Now we encode the message according to these instructions
+        encoded_phrase = ''
+        self.encoding = []
+        for cube_ops, sub_phrase in zip(ops_list, phrase_list):
+            cube = Cube(sub_phrase)
+            for op in cube_ops:
+                if op == 'U':
+                    cube.rotate_up()
+                elif op == 'D':
+                    cube.rotate_down()
+                elif op == 'L':
+                    cube.rotate_left()
+                else:
+                    cube.rotate_right()
+            print(cube.get_message())  
+            self.encoding.append(cube)
+            encoded_phrase += cube.get_message()
+        
+        return encoded_phrase 
 
 
     def decode(self, phrase ,key):
@@ -93,8 +123,8 @@ class Encoder():
         decode receives an encrypted phrase and a key, and returns
         that phrase decrypted per the key's instructions.
         """
-
-        return word
+        
+# return decoded_phrase 
 
 # TODO: need to change this method into something like class method or static to
 # allow people to call it without instantiating the class
@@ -147,8 +177,8 @@ def main():
     print(phrase + ' is ' + str(len(phrase)) + " characters long")
     key = encoder.keyGenerator(phrase)
     print(key)
-    encoder.encode(phrase, key)
-#    print(keyGenerator(phrase))
+    encoded_phrase = encoder.encode(phrase, key)
+    print(encoded_phrase)
 
 
 if __name__=='__main__':
