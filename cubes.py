@@ -74,15 +74,7 @@ class Encoder():
         as a key.  
         """
 
-        # We will create a list of lists from the key
-        # The main list will be a list of cubes and for each cube
-        # we will have a list of rotations.  That should work.
-        # A key looks like this:   0:U:U:L:D,1:D,2:L:U:L
-        cube_list = key.split(',')
-        ops_list = []
-        for cube in cube_list:
-            ops = cube.split(':')
-            ops_list.append(list(ops[1:]))
+        ops_list = self.parse_key(key) 
 
         # Create a list of sub-strings from the message which will fit into a cube
         phrase_list = [phrase[start:start+8] for start in range(0, len(phrase), 8)]
@@ -150,6 +142,20 @@ class Encoder():
                 # Each time we pick a random direction
                 key += ':' + dirs[random.randint(0, len(dirs) - 1)]
         return key
+
+
+    def parse_key(self, key):
+        # We will create a list of lists from the key
+        # The main list will be a list of cubes and for each cube
+        # we will have a list of rotations.  That should work.
+        # A key looks like this:   0:U:U:L:D,1:D,2:L:U:L
+        cube_list = key.split(',')
+        ops_list = []
+        for cube in cube_list:
+            ops = cube.split(':')
+            ops_list.append(list(ops[1:]))
+
+        return ops_list
 
 def main():
     if  len(sys.argv) > 1:
