@@ -72,7 +72,20 @@ class Encoder():
         as a key.  
         """
 
-        return encoded_phrase 
+        # We will create a list of lists from the key
+        # The main list will be a list of cubes and for each cube
+        # we will have a list of rotations.  That should work.
+        # A key looks like this:   0:U:U:L:D,1:D,2:L:U:L
+        cube_list = key.split(',')
+        ops_list = []
+        for cube in cube_list:
+            ops = cube.split(':')
+            ops_list.append(list(ops[1:]))
+
+        print(ops_list)
+        
+
+#        return encoded_phrase 
 
 
     def decode(self, phrase ,key):
@@ -83,6 +96,8 @@ class Encoder():
 
         return word
 
+# TODO: need to change this method into something like class method or static to
+# allow people to call it without instantiating the class
     def keyGenerator(self, phrase):
         """
         keyGenerator is just a utility function, which makes generating
@@ -130,7 +145,9 @@ def main():
 
     encoder = Encoder()
     print(phrase + ' is ' + str(len(phrase)) + " characters long")
-    print(encoder.keyGenerator(phrase))
+    key = encoder.keyGenerator(phrase)
+    print(key)
+    encoder.encode(phrase, key)
 #    print(keyGenerator(phrase))
 
 
