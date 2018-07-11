@@ -106,13 +106,12 @@ class Encoder():
         key = ''
         for c in range(num_cubes):
             if c > 0:
-                key.join(',')
-            key.join(str(c))
-            print(key)
+                key += ','
+            key += str(c)
             # Select random number of rotations
-            for rot in range(1, random.randint(0, 5)):
+            for rot in range(1, random.randint(2, 5)):
                 # Each time we pick a random direction
-                key.join(':' + dirs[random.randint(0, len(dirs) - 1)])
+                key += ':' + dirs[random.randint(0, len(dirs) - 1)]
         return key
 
 if __name__=='__main__':
@@ -120,7 +119,7 @@ if __name__=='__main__':
         phrase = sys.argv[1]
         
     else:
-        phrase = 'Secure'
+        phrase = 'Security is the key to prosperity'
 
 #    cube = Cube(phrase)
 #    print(cube.print_message())
@@ -131,4 +130,6 @@ if __name__=='__main__':
 #    print(cube.print_message())
 
     encoder = Encoder()
+    print(phrase + ' is ' + str(len(phrase)) + " characters long")
     print(encoder.keyGenerator(phrase))
+#    print(keyGenerator(phrase))
