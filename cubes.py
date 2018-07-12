@@ -78,8 +78,6 @@ class Encoder():
 
         # Create a list of sub-strings from the message which will fit into a cube
         phrase_list = [phrase[start:start+8] for start in range(0, len(phrase), 8)]
-        if DEBUG:
-            print(phrase_list)
 
         # Now we encode the message according to these instructions
         encoded_phrase = ''
@@ -95,7 +93,6 @@ class Encoder():
                     cube.rotate_left()
                 else:
                     cube.rotate_right()
-            print(cube.get_message())  
             self.encoding.append(cube)
             encoded_phrase += cube.get_message()
         
@@ -109,10 +106,8 @@ class Encoder():
         """
         ops_list = self.parse_key(key) 
         # The order of rotations needs to be reversed to undo encoding  
-        print(ops_list)
         # Using extended slices here [::-1]
         ops_list = [a[::-1] for a in ops_list]
-        print(ops_list)
             
 
         # Now we decode it, but how does the last cube get decoded with 
@@ -130,7 +125,6 @@ class Encoder():
                 else:
                     cube.rotate_left()
             decoded_phrase += cube.get_message()
-            print(cube.get_message())
         
         return decoded_phrase 
 
@@ -186,14 +180,6 @@ def main():
         phrase = sys.argv[1]
     else:
         phrase = 'Security is the key to prosperity'
-
-#    cube = Cube(phrase)
-#    print(cube.print_message())
-#    cube.rotate_up()
-#    cube.rotate_down()
-#    cube.rotate_left()
-#    cube.rotate_right()
-#    print(cube.print_message())
 
     encoder = Encoder()
     print(phrase + ' is ' + str(len(phrase)) + " characters long")
