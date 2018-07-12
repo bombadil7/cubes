@@ -73,7 +73,7 @@ class Encoder():
         The number of cubes required and rotation sequence comes
         as a key.  
         """
-
+        # Create a list of rotations for each cube
         ops_list = self.parse_key(key) 
 
         # Create a list of sub-strings from the message which will fit into a cube
@@ -107,8 +107,32 @@ class Encoder():
         decode receives an encrypted phrase and a key, and returns
         that phrase decrypted per the key's instructions.
         """
+        ops_list = self.parse_key(key) 
+        # The order of rotations needs to be reversed to undo encoding  
+        print(ops_list)
+        # Using extended slices here [::-1]
+        ops_list = [a[::-1] for a in ops_list]
+        print(ops_list)
+            
+
+        # Now we decode it, but how does the last cube get decoded with 
+        # empty spaces sprincled around?
+        # We would have to apply decryption key to the cubes list directly.
+        decoded_phrase = ''
+        for cube, ops in zip(self.encoding, ops_list):
+            for op in ops:
+                if op == 'U':
+                    cube.rotate_down()
+                elif op == 'D':
+                    cube.rotate_up()
+                elif op == 'L':
+                    cube.rotate_right()
+                else:
+                    cube.rotate_left()
+            decoded_phrase += cube.get_message()
+            print(cube.get_message())
         
-# return decoded_phrase 
+        return decoded_phrase 
 
 # TODO: need to change this method into something like class method or static to
 # allow people to call it without instantiating the class
@@ -177,6 +201,8 @@ def main():
     print(key)
     encoded_phrase = encoder.encode(phrase, key)
     print(encoded_phrase)
+    decoded_phrase = encoder.decode(encoded_phrase, key)
+    print(decoded_phrase)
 
 
 if __name__=='__main__':
