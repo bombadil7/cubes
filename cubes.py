@@ -27,7 +27,11 @@ class Cube:
 # Create an empty dictionary.  This way the cube has all the corners.
         self.ver = {}
         for k in self.corners:
-            self.ver[k] = ''
+            # Initializing corners with spaces allows us to recover the original
+            # phrase directly from the encoded message, not needing the
+            # cube datastructure.  Otherwise the last cube, which may not
+            # be fully populated, will hide positions of characters.
+            self.ver[k] = ' '
 
 # Fill in the corners with available letters
         mes = [message[i] for i in range(len(message))]
@@ -65,6 +69,10 @@ class Cube:
         
 
 class Encoder():
+
+    def __init__(self):
+        self.encoding = []
+
     def encode(self, phrase, key):
         """
         encode receives a phrase to encrypt and a key, and 
@@ -81,7 +89,7 @@ class Encoder():
 
         # Now we encode the message according to these instructions
         encoded_phrase = ''
-        self.encoding = []
+#self.encoding = []
         for cube_ops, sub_phrase in zip(ops_list, phrase_list):
             cube = Cube(sub_phrase)
             for op in cube_ops:
