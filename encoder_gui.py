@@ -46,48 +46,48 @@ from cubes import Encoder
 window = Tk()
 window.wm_title('Encoder')
 
-gen_key_button = Button(window, text="Generate Random Key", width=14)
-gen_key_button.grid(row=3, column=1)
+gen_key_button = Button(window, text="Generate Random Key", width=18)
+gen_key_button.grid(row=3, column=2)
 
-encrypt_button = Button(window, text="Encrypt Message", width=14)
-encrypt_button.grid(row=5, column=1)
+encrypt_button = Button(window, text="Encrypt Message", width=18)
+encrypt_button.grid(row=5, column=2)
 
-decrypt_button = Button(window, text="Decrypt Message", width=14)
-decrypt_button.grid(row=7, column=1)
+decrypt_button = Button(window, text="Decrypt Message", width=18)
+decrypt_button.grid(row=7, column=2)
 
 clear_button = Button(window, text="Clear All", width = 6)
 clear_button.grid(row=9, column=1)
 
 quit_button = Button(window, text="Quit", width = 6)
-quit_button.grid(row=9, column=4)
+quit_button.grid(row=9, column=3)
 
-message_label = Label(window, text="Original Message", width=20)
-message_label.grid(row=1, column=12)
+message_label = Label(window, text="Original Message", width=25)
+message_label.grid(row=1, column=4)
 
-key_label = Label(window, text="Enter Encryption Key", width=20)
-key_label.grid(row=3, column=12)
+key_label = Label(window, text="Enter Encryption Key", width=25)
+key_label.grid(row=3, column=4)
 
-encr_message_label = Label(window, text="Encrypted Message", width=20)
-encr_message_label.grid(row=5, column=12)
+encr_message_label = Label(window, text="Encrypted Message", width=25)
+encr_message_label.grid(row=5, column=4)
 
-decr_message_label = Label(window, text="Decrypted Message", width=20)
-decr_message_label.grid(row=7, column=12)
+decr_message_label = Label(window, text="Decrypted Message", width=25)
+decr_message_label.grid(row=7, column=4)
 
 message_text = StringVar()
 message_entry = Entry(window, textvariable=message_text)
-message_entry.grid(row=2, column=12)
+message_entry.grid(row=2, column=4)
 
 key_text = StringVar()
 key_entry = Entry(window, textvariable=key_text)
-key_entry.grid(row=4, column=12)
+key_entry.grid(row=4, column=4)
 
 encr_message_text = StringVar()
 encr_message_entry = Entry(window, textvariable=encr_message_text)
-encr_message_entry.grid(row=6, column=12)
+encr_message_entry.grid(row=6, column=4)
 
 decr_message_text = StringVar()
 decr_message_entry = Entry(window, textvariable=decr_message_text)
-decr_message_entry.grid(row=8, column=12)
+decr_message_entry.grid(row=8, column=4)
 
 
 window.mainloop()
