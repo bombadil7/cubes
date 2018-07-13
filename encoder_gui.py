@@ -46,20 +46,20 @@ from cubes import Encoder
 window = Tk()
 window.wm_title('Encoder')
 
-gen_key_button = Button(window, text="Generate Random Key", width=18)
-gen_key_button.grid(row=3, column=2)
+gen_key_button = Button(window, padx=5, text="Generate Random Key", width=18)
+gen_key_button.grid(row=3, column=1, columnspan=3)
 
-encrypt_button = Button(window, text="Encrypt Message", width=18)
-encrypt_button.grid(row=5, column=2)
+encrypt_button = Button(window, padx=5, text="Encrypt Message", width=18)
+encrypt_button.grid(row=5, column=1, columnspan=3)
 
-decrypt_button = Button(window, text="Decrypt Message", width=18)
-decrypt_button.grid(row=7, column=2)
+decrypt_button = Button(window, padx=5, text="Decrypt Message", width=18)
+decrypt_button.grid(row=7, column=1, columnspan=3)
 
-clear_button = Button(window, text="Clear All", width = 6)
-clear_button.grid(row=9, column=1)
+clear_button = Button(window, text="Clear All", padx=10)
+clear_button.grid(row=9, column=1, sticky=W)
 
-quit_button = Button(window, text="Quit", width = 6)
-quit_button.grid(row=9, column=3)
+quit_button = Button(window, text="Quit", padx=10, command=window.quit)
+quit_button.grid(row=9, column=2)
 
 message_label = Label(window, text="Original Message", width=25)
 message_label.grid(row=1, column=4)
