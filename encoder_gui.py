@@ -44,7 +44,7 @@ from tkinter import *
 from cubes import Encoder
 
 window = Tk()
-window.wm_title('Encoder')
+window.title('Encoder')
 
 gen_key_button = Button(window, padx=5, text="Generate Random Key", width=18)
 gen_key_button.grid(row=3, column=1, columnspan=3)
